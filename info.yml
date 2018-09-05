@@ -1,0 +1,4 @@
+app-emulation/lxc:
+  pattern: asc
+  gpg_pubkeys:
+    - 602F567663E593BCBD14F338C638974D64792D67
