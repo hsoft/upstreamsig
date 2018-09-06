@@ -6,6 +6,7 @@ import urllib.request
 import sys
 import tempfile
 import hashlib
+from functools import partial
 
 import portage
 import gnupg
@@ -39,17 +40,19 @@ def verify_file(path, key_url, accepted_keys):
     if verified.fingerprint in accepted_keys:
         print(f"Ok! ({verified.fingerprint})")
     else:
-        print("Verification failed!")
-        import pdb; pdb.set_trace()
+        if verified.fingerprint:
+            print(f"Good sig but disallowed fingerprint: {verified.fingerprint}")
+        else:
+            print("Verification failed!")
         sys.exit(1)
 
-def verify_cpv_asc(cpv, attrs):
+def verify_cpv_asc(cpv, attrs, ext='asc'):
     db = portage.db['/']['porttree'].dbapi
     src_uri = db.aux_get(cpv, ('SRC_URI', ))[0]
     distname = list(db.getFetchMap(cpv).keys())[0]
     distpath = get_distfile_path(distname)
     download_distfile_if_needed(distpath, cpv)
-    verify_file(distpath, f'{src_uri}.asc', attrs['gpg_pubkeys'])
+    verify_file(distpath, f'{src_uri}.{ext}', attrs['gpg_pubkeys'])
 
 
 def verify_cpv_firefox(cpv, attrs):
@@ -76,6 +79,7 @@ def verify_cpv_firefox(cpv, attrs):
 
 CHECKFUNCS = {
     'asc': verify_cpv_asc,
+    'sig': partial(verify_cpv_asc, ext='sig'),
     'firefox': verify_cpv_firefox,
 }
 

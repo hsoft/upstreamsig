@@ -3,6 +3,12 @@ app-emulation/lxc:
   gpg_pubkeys:
     - 602F567663E593BCBD14F338C638974D64792D67
 
+media-libs/mesa:
+  pattern: sig
+  gpg_pubkeys:
+    - 9438D3A9ABF8E499180A4959B68682899D952AB7
+    - 71C4B75620BC75708B4BDB254C95FAAB3EB073EC
+
 net-libs/webkit-gtk:
   pattern: asc
   gpg_pubkeys:
