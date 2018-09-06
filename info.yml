@@ -2,3 +2,9 @@ app-emulation/lxc:
   pattern: asc
   gpg_pubkeys:
     - 602F567663E593BCBD14F338C638974D64792D67
+
+net-libs/webkit-gtk:
+  pattern: asc
+  gpg_pubkeys:
+    - D7FCF61CF9A2DEAB31D81BD3F3D322D0EC4582C3
+
