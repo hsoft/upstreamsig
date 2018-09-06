@@ -8,3 +8,7 @@ net-libs/webkit-gtk:
   gpg_pubkeys:
     - D7FCF61CF9A2DEAB31D81BD3F3D322D0EC4582C3
 
+www-client/firefox:
+  pattern: firefox
+  gpg_pubkeys:
+    - DCEAC5D96135B91C4EA672ABBBBEBDBB24C6F355
